@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit product</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <form action="/products/update" method="post" class="col-md-8 mx-auto mt-4">
+            <h4>Edit product</h4>
+            <div class="mb-3">
+                <label for="">Title</label>
+                <input class="form-control" name="title" id="title" type="text" value="<%= product.title %>">
+            </div>
+            <div class="mb-3">
+                <label for="">Description</label>
+                <input class="form-control" name="description" id="description" type="text"
+                    value="<%= product.description %>">
+            </div>
+            <div class="mb-3">
+                <label for="">Price</label>
+                <input class="form-control" name="price" id="price" type="number" min="0" step="0.01"
+                    value="<%= product.price %>">
+            </div>
+            <% const date=new Date(product.expiration_date); const year=String(date.getFullYear()); const
+                month=String(date.getMonth() + 1).padStart(2, '0' ); const day=String(date.getDate()).padStart(2, '0' );
+                const formattedDate=year + "-" + month + "-" + day; %>
+
+                <div class="mb-3">
+                    <label for="">Expiration date</label>
+                    <input class="form-control" name="expiration_date" id="expiration_date" type="date"
+                        value="<%= formattedDate %>">
+                </div>
+                <input type="hidden" name="id" value="<%= product.id %>">
+                <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</body>
+
+</html>

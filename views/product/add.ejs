@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>New product</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <form action="/products/create" method="post" class="col-md-8 mx-auto mt-4">
+            <h4>New product</h4>
+            <div class="mb-3">
+                <label for="">Title</label>
+                <input class="form-control" name="title" id="title" type="text">
+            </div>
+            <div class="mb-3">
+                <label for="">Description</label>
+                <input class="form-control" name="description" id="description" type="text">
+            </div>
+            <div class="mb-3">
+                <label for="">Price</label>
+                <input class="form-control" name="price" id="price" type="number" min="0" step="0.01">
+            </div>
+            <div class="mb-3">
+                <label for="">Expiration date</label>
+                <input class="form-control" name="expiration_date" id="expiration_date" type="date">
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</body>
+
+</html>

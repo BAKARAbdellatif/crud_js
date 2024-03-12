@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const $ = require("jquery");
 
 const productRoutes = require("./routes/productRoutes");
 

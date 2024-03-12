@@ -2,9 +2,36 @@
 
 <head>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
+<script>
+    $(document).ready(function () {
+        $(".deleteBtn").click(function () {
+            var productId = $(this).attr("id");
+
+            if (confirm("Are you sure to delete?")) {
+                $.ajax({
+                    url: '/products/delete/' + productId,
+                    type: 'DELETE',
+                    success: function (response) {
+                        $("#product_" + productId).remove();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+        });
+    });
+</script>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a href="/products/" class="navbar-brand">Product list</a>
+            <a href="/products/add" class="btn btn-primary d-flex">Add product</a>
+        </div>
+    </nav>
     <div class="container-fluid">
         <div class="col-md-11 mx-auto">
             <table class="table table-striped table-hover">
@@ -19,7 +46,7 @@
                 </thead>
                 <tbody>
                     <% products.forEach(product=> { %>
-                        <tr>
+                        <tr id="product_<%= product.id %>">
                             <td>
                                 <%= product.title %>
                             </td>
@@ -30,11 +57,16 @@
                                 <%= product.price %>
                             </td>
                             <td>
-                                <%= product.expiration_date %>
+
+                                <% const date=new Date(product.expiration_date); const year=String(date.getFullYear());
+                                    const month=String(date.getMonth() + 1).padStart(2, '0' ); const
+                                    day=String(date.getDate()).padStart(2, '0' ); const formattedDate=day + "/" + month
+                                    + "/" + year; %>
+                                    <%= formattedDate %>
                             </td>
                             <td>
-                                <button class="btn btn-success">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
+                                <a href="/products/edit/<%= product.id %>" class="btn btn-success">Edit</a>
+                                <button class="btn btn-danger deleteBtn" id="<%= product.id %>">Delete</button>
                             </td>
                         </tr>
                         <% }); %>
