@@ -9,7 +9,7 @@
         $(".deleteBtn").click(function () {
             var productId = $(this).attr("id");
 
-            if (confirm("Are you sure to delete?")) {
+            if (confirm("Are you sure you want to delete ?")) {
                 $.ajax({
                     url: '/products/delete/' + productId,
                     type: 'DELETE',
